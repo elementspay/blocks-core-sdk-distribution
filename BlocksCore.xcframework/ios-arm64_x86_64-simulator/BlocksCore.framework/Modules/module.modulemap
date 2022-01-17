@@ -1,0 +1,11 @@
+framework module BlocksCore {
+  umbrella header "BlocksCore.h"
+
+  export *
+  module * { export * }
+}
+
+module BlocksCore.Swift {
+    header "BlocksCore-Swift.h"
+    requires objc
+}
