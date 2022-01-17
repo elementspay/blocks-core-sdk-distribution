@@ -1,0 +1,304 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
+// swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name BlocksCore
+@_exported import BlocksCore
+import Darwin/*.fputs*/
+import Foundation
+import Swift
+import UIKit
+import _Concurrency
+open class ComponentizedBuilder<Component, Router, DynamicBuildDependency, DynamicComponentDependency> : BlocksCore.Buildable {
+  public init(componentBuilder: @escaping (DynamicComponentDependency) -> Component)
+  final public func build(withDynamicBuildDependency dynamicBuildDependency: DynamicBuildDependency, dynamicComponentDependency: DynamicComponentDependency) -> Router
+  final public func build(withDynamicBuildDependency dynamicBuildDependency: DynamicBuildDependency, dynamicComponentDependency: DynamicComponentDependency) -> (Component, Router)
+  open func build(with component: Component, _ dynamicBuildDependency: DynamicBuildDependency) -> Router
+  @objc deinit
+}
+open class SimpleComponentizedBuilder<Component, Router> : BlocksCore.ComponentizedBuilder<Component, Router, (), ()> {
+  public init(componentBuilder: @escaping () -> Component)
+  final override public func build(with component: Component, _ dynamicDependency: ()) -> Router
+  open func build(with component: Component) -> Router
+  final public func build() -> Router
+  @objc deinit
+}
+public protocol RouterPresentable {
+  func toPresentable() -> UIKit.UIViewController
+}
+public protocol ViewControllable : BlocksCore.RouterPresentable {
+  var uiviewController: UIKit.UIViewController { get }
+}
+extension BlocksCore.ViewControllable where Self : UIKit.UIViewController {
+  public var uiviewController: UIKit.UIViewController {
+    get
+  }
+}
+public protocol APIEnvironment {
+  var baseURL: Foundation.URL { get }
+  var headers: [Swift.String : Swift.String] { get }
+  var queryParameters: [Foundation.URLQueryItem] { get }
+}
+public protocol APIClientProtocol {
+  typealias CompletionHandler<T> = (Swift.Result<T, Swift.Error>) -> Swift.Void
+  func perform<R>(_ request: R, completionHandler: @escaping Self.CompletionHandler<R.ResponseType>) where R : BlocksCore.BlocksAPIRequest
+}
+final public class APIClient : BlocksCore.APIClientProtocol {
+  final public let environment: BlocksCore.APIEnvironment
+  public init(environment: BlocksCore.APIEnvironment)
+  final public func perform<R>(_ request: R, completionHandler: @escaping BlocksCore.APIClient.CompletionHandler<R.ResponseType>) where R : BlocksCore.BlocksAPIRequest
+  @objc deinit
+}
+public func printAsJSON(_ data: Foundation.Data)
+public protocol InteractorScope : AnyObject {
+  var isActive: Swift.Bool { get }
+}
+public protocol Interactable : BlocksCore.InteractorScope {
+  func activate()
+  func deactivate()
+}
+open class Interactor : BlocksCore.Interactable {
+  public var isActive: Swift.Bool
+  public init()
+  final public func activate()
+  open func didBecomeActive()
+  final public func deactivate()
+  open func willResignActive()
+  @objc deinit
+}
+public struct Environment : BlocksCore.APIEnvironment {
+  public var baseURL: Foundation.URL
+  public var headers: [Swift.String : Swift.String] {
+    get
+  }
+  public var queryParameters: [Foundation.URLQueryItem]
+  public let clientToken: Swift.String
+  public static func sandbox(clientToken: Swift.String) -> BlocksCore.Environment
+  public static func portForward(clientToken: Swift.String) -> BlocksCore.Environment
+  public static func production(clientToken: Swift.String) -> BlocksCore.Environment
+  public static let unknown: BlocksCore.Environment
+  public init(baseURL: Foundation.URL? = nil, clientToken: Swift.String)
+}
+public protocol Dependency : AnyObject {
+}
+public protocol EmptyDependency : BlocksCore.Dependency {
+}
+public typealias VoidCompletion = (() -> Swift.Void)
+public protocol BasePresenterOutput : AnyObject {
+  func showNetworkRequestError(message: Swift.String?)
+  func showNetworkSuccess(message: Swift.String?)
+  func hideMessageErrorView()
+  func showLoadingView()
+  func hideLoadingView(completion: BlocksCore.VoidCompletion?)
+}
+public protocol Presentable : AnyObject {
+  func presentNetworkRequestError(message: Swift.String?)
+  func presentNetworkSuccess(message: Swift.String?)
+  func dismissMessageErrorView()
+  func presentLoadingView()
+  func dismissLoadingView(completion: BlocksCore.VoidCompletion?)
+}
+public protocol BaseViewControllable : AnyObject {
+  func showNetworkSuccess(message: Swift.String?)
+  func showNetworkRequestError(message: Swift.String?)
+  func hideMessageErrorView()
+  func showLoadingView()
+  func hideLoadingView(completion: BlocksCore.VoidCompletion?)
+}
+open class Presenter<ViewControllerType> : BlocksCore.Presentable {
+  final public let viewController: ViewControllerType
+  final public let viewControllable: BlocksCore.ViewControllable?
+  public init(viewController: ViewControllerType)
+  public func presentNetworkSuccess(message: Swift.String?)
+  public func presentNetworkRequestError(message: Swift.String?)
+  public func dismissMessageErrorView()
+  public func presentLoadingView()
+  public func dismissLoadingView(completion: BlocksCore.VoidCompletion?)
+  @objc deinit
+}
+public struct BlocksScope<Base> {
+  public let base: Base
+  public init(base: Base)
+}
+public protocol BlocksCompatible {
+  associatedtype BlocksBase
+  var blocks: BlocksCore.BlocksScope<Self.BlocksBase> { get }
+}
+extension BlocksCore.BlocksCompatible {
+  public var blocks: BlocksCore.BlocksScope<Self> {
+    get
+  }
+}
+open class PresentableInteractor<PresenterType> : BlocksCore.Interactor {
+  final public let presenter: PresenterType
+  public init(presenter: PresenterType)
+  @objc deinit
+}
+public protocol Scheduler {
+  func schedule(_ currentCount: Swift.UInt, closure: @escaping () -> Swift.Void) -> Swift.Bool
+}
+public enum RouterLifecycle {
+  case didLoad
+  public static func == (a: BlocksCore.RouterLifecycle, b: BlocksCore.RouterLifecycle) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol RouterScope : AnyObject {
+}
+public protocol Routing : BlocksCore.RouterScope {
+  var interactable: BlocksCore.Interactable { get }
+  var children: [BlocksCore.Routing] { get }
+  func load()
+  func attachChild(_ child: BlocksCore.Routing)
+  func detachChild(_ child: BlocksCore.Routing)
+}
+open class Router<InteractorType> : BlocksCore.Routing {
+  final public let interactor: InteractorType
+  final public let interactable: BlocksCore.Interactable
+  final public var children: [BlocksCore.Routing]
+  public init(interactor: InteractorType)
+  final public func load()
+  open func didLoad()
+  final public func attachChild(_ child: BlocksCore.Routing)
+  final public func detachChild(_ child: BlocksCore.Routing)
+  @objc deinit
+}
+public protocol ViewableRouting : BlocksCore.Routing {
+  var viewControllable: BlocksCore.ViewControllable { get }
+}
+open class ViewableRouter<InteractorType, ViewControllerType> : BlocksCore.Router<InteractorType>, BlocksCore.ViewableRouting {
+  final public let viewController: ViewControllerType
+  final public let viewControllable: BlocksCore.ViewControllable
+  public init(interactor: InteractorType, viewController: ViewControllerType)
+  @objc deinit
+}
+open class Component<DependencyType> : BlocksCore.Dependency {
+  final public let dependency: DependencyType
+  public init(dependency: DependencyType)
+  final public func shared<T>(__function: Swift.String = #function, _ factory: () -> T) -> T
+  @objc deinit
+}
+open class EmptyComponent : BlocksCore.EmptyDependency {
+  public init()
+  @objc deinit
+}
+extension Swift.Array {
+  public mutating func removeElementByReference(_ element: Element)
+}
+public enum BlocksLogging {
+  public static var isEnabled: Swift.Bool
+}
+public func blocksPrint(_ items: Any..., separator: Swift.String = " ", terminator: Swift.String = "\n")
+open class MultiStageComponentizedBuilder<Component, Router, DynamicBuildDependency> : BlocksCore.Buildable {
+  public var componentForCurrentBuildPass: Component {
+    get
+  }
+  public init(componentBuilder: @escaping () -> Component)
+  final public func finalStageBuild(withDynamicDependency dynamicDependency: DynamicBuildDependency) -> Router
+  open func finalStageBuild(with component: Component, _ dynamicDependency: DynamicBuildDependency) -> Router
+  @objc deinit
+}
+@_inheritsConvenienceInitializers open class SimpleMultiStageComponentizedBuilder<Component, Router> : BlocksCore.MultiStageComponentizedBuilder<Component, Router, ()> {
+  override public init(componentBuilder: @escaping () -> Component)
+  final override public func finalStageBuild(with component: Component, _ dynamicDependency: ()) -> Router
+  open func finalStageBuild(with component: Component) -> Router
+  final public func finalStageBuild() -> Router
+  @objc deinit
+}
+extension Foundation.URLSession : BlocksCore.BlocksCompatible {
+  public typealias BlocksBase = Foundation.URLSession
+}
+extension BlocksCore.BlocksScope where Base : Foundation.URLSession {
+  public func dataTask(with url: Foundation.URL, completion: @escaping ((Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)) -> Foundation.URLSessionDataTask
+  public func dataTask(with urlRequest: Foundation.URLRequest, completion: @escaping ((Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)) -> Foundation.URLSessionDataTask
+}
+public struct ElementsAPIError : Swift.Decodable, Swift.Error, Foundation.LocalizedError {
+  public var status: Swift.Int?
+  public let errorCode: Swift.String
+  public let errorMessage: Swift.String
+  public let type: BlocksCore.APIErrorType
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public init(status: Swift.Int?, errorCode: Swift.String, errorMessage: Swift.String, type: BlocksCore.APIErrorType)
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum APIErrorType : Swift.String, Swift.Decodable {
+  case cardError
+  case apiError
+  case authenticationError
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class Analytics {
+  public static var sdkVersion: Swift.String
+  public static var environment: BlocksCore.Environment
+  public static var isEnabled: Swift.Bool
+  public static func log(eventName: Swift.String, eventProperties: [Swift.String : Any]? = nil, userProperties: [Swift.String : Any]? = nil)
+  @objc deinit
+}
+public enum Coder {
+  public static func decode<T>(_ data: Foundation.Data) throws -> T where T : Swift.Decodable
+  public static func decode<T>(_ string: Swift.String) throws -> T where T : Swift.Decodable
+  public static func decodeBase64<T>(_ string: Swift.String) throws -> T where T : Swift.Decodable
+  public static func encode<T>(_ value: T) throws -> Foundation.Data where T : Swift.Encodable
+  public static func encode<T>(_ value: T) throws -> Swift.String where T : Swift.Encodable
+  public static func encodeBase64<T>(_ value: T) throws -> Swift.String where T : Swift.Encodable
+  public static let decoder: Foundation.JSONDecoder
+  public static let encoder: Foundation.JSONEncoder
+}
+public struct SimpleScheduler : BlocksCore.Scheduler {
+  public init(maximumCount: Swift.Int)
+  public func schedule(_ currentCount: Swift.UInt, closure: @escaping () -> Swift.Void) -> Swift.Bool
+}
+public enum HttpMethod : Swift.String, Swift.Codable {
+  case get
+  case post
+  case put
+  case delete
+  case head
+  case patch
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol BlocksAPIRequest : Swift.Encodable {
+  associatedtype ResponseType : BlocksCore.BlocksAPIResponse
+  var path: Swift.String { get }
+  var counter: Swift.UInt { get set }
+  var headers: [Swift.String : Swift.String] { get }
+  var queryParameters: [Foundation.URLQueryItem] { get }
+  var method: BlocksCore.HttpMethod { get }
+}
+public protocol BlocksAPIResponse : Swift.Decodable {
+}
+public protocol AnyRetryAPIClient : BlocksCore.APIClientProtocol {
+  typealias ShouldRetryHandler<T> = (_ result: Swift.Result<T, Swift.Error>) -> Swift.Bool
+  func perform<R>(_ request: R, shouldRetry: Self.ShouldRetryHandler<R.ResponseType>?, completionHandler: @escaping Self.CompletionHandler<R.ResponseType>) where R : BlocksCore.BlocksAPIRequest
+}
+final public class RetryAPIClient : BlocksCore.AnyRetryAPIClient {
+  public init(apiClient: BlocksCore.APIClientProtocol, scheduler: BlocksCore.Scheduler)
+  final public func perform<R>(_ request: R, completionHandler: @escaping BlocksCore.RetryAPIClient.CompletionHandler<R.ResponseType>) where R : BlocksCore.BlocksAPIRequest
+  final public func perform<R>(_ request: R, shouldRetry: BlocksCore.RetryAPIClient.ShouldRetryHandler<R.ResponseType>?, completionHandler: @escaping BlocksCore.RetryAPIClient.CompletionHandler<R.ResponseType>) where R : BlocksCore.BlocksAPIRequest
+  @objc deinit
+}
+public protocol Buildable : AnyObject {
+}
+open class Builder<DependencyType> : BlocksCore.Buildable {
+  final public let dependency: DependencyType
+  public init(dependency: DependencyType)
+  @objc deinit
+}
+extension BlocksCore.RouterLifecycle : Swift.Equatable {}
+extension BlocksCore.RouterLifecycle : Swift.Hashable {}
+extension BlocksCore.APIErrorType : Swift.Equatable {}
+extension BlocksCore.APIErrorType : Swift.Hashable {}
+extension BlocksCore.APIErrorType : Swift.RawRepresentable {}
+extension BlocksCore.HttpMethod : Swift.Equatable {}
+extension BlocksCore.HttpMethod : Swift.Hashable {}
+extension BlocksCore.HttpMethod : Swift.RawRepresentable {}
