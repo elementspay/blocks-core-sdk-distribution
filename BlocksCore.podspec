@@ -18,11 +18,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', 'SWIFT_SUPPRESS_WARNINGS' => 'YES' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  s.source_files = 'BlocksCore/**/*.swift'
-  s.ios.resource_bundles = {
-    'BlocksCore' => [
-      'BlocksCore/Assets/**/*.strings',
-      'BlocksCore/Assets/**/*.xcassets'
-    ]
-  }
+  s.vendored_frameworks = 'BlocksCore.xcframework'
 end
