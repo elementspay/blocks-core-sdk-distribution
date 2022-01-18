@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   framework_filename = "BlocksCore.xcframework"
 
   s.name = 'BlocksCore'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.summary = 'Blocks Core iOS SDK'
   s.description = <<-DESC
     Blocks official SDK
