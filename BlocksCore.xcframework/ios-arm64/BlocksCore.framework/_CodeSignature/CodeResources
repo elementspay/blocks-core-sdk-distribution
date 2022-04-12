@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BlocksCore-Swift.h</key>
 		<data>
-		LW7pkTWYlFcMJGOretWYufBiCBs=
+		GKgYxrqSJ2KpdcN4QcFh4mvG7/s=
 		</data>
 		<key>Headers/BlocksCore.h</key>
 		<data>
@@ -14,7 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Mz8YWdekvOdTXadPbkjJo7na1xY=
+		2RsKlFax3rnioMlf/mlJX82vKFk=
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		0xjdUI6l/iov1pChQyO4cwUkX2Q=
+		dOF8+t05uxsqIXqhp1TlXSwUcno=
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		0xjdUI6l/iov1pChQyO4cwUkX2Q=
+		dOF8+t05uxsqIXqhp1TlXSwUcno=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -51,7 +51,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2QCL4nzst3esAnRt3qjpcSQpYClWoXvtNCkw8ZybEZo=
+			/VxVOvIfKhPOu/E/dsfpdUj+JgXYrBe5s7lINiaE30c=
 			</data>
 		</dict>
 		<key>Headers/BlocksCore.h</key>
@@ -79,7 +79,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			y/4dvQ10kBV13u8RpHhFhrwNnTxoWObSmiOyB+N9Z1k=
+			QBTY1A3rp4A41JGeuH3T8B7Lz4E/ADLKZ18TkY+431I=
 			</data>
 		</dict>
 		<key>Modules/BlocksCore.swiftmodule/arm64.swiftdoc</key>
@@ -100,7 +100,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			y/4dvQ10kBV13u8RpHhFhrwNnTxoWObSmiOyB+N9Z1k=
+			QBTY1A3rp4A41JGeuH3T8B7Lz4E/ADLKZ18TkY+431I=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

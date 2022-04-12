@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BlocksCore-Swift.h</key>
 		<data>
-		eU6h2vCSgb0LeG4yk0da/iiYIqY=
+		jQVWMl/JZi8dqxtBgG5DCJo9GDA=
 		</data>
 		<key>Headers/BlocksCore.h</key>
 		<data>
@@ -14,7 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		5z29N9g+es83I4wKo5B3HxeLxGc=
+		mELu8doggJY4G4vwrITPX/4GdHw=
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		8Fp/m2RkSNu4zcW60gP/Ra/BinE=
+		w7qwYdPFlbKUwnw1C8RRZHuDBtw=
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		8Fp/m2RkSNu4zcW60gP/Ra/BinE=
+		w7qwYdPFlbKUwnw1C8RRZHuDBtw=
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		dBE5JhqeUndE+e0/T8KKtzocCXA=
+		+xO4S18aqshx+wdQZh962/ozmrE=
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Modules/BlocksCore.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		dBE5JhqeUndE+e0/T8KKtzocCXA=
+		+xO4S18aqshx+wdQZh962/ozmrE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -75,7 +75,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			64ZGJOG1zFquL+ELf5CKw9b5C1Yvz3GaT0iNq3eHktk=
+			tbcZVOBM4M4Q6/ANV4YmaUadteYC3OnL2MrwupLzdYc=
 			</data>
 		</dict>
 		<key>Headers/BlocksCore.h</key>
@@ -103,7 +103,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			S2i7JHFfYFX5O2JB68pk23v31reoIbalJaOrnl3YxJA=
+			RdjJeaKRIde778eBcqLzwjUoerHjqkhr0JROY2eDz0k=
 			</data>
 		</dict>
 		<key>Modules/BlocksCore.swiftmodule/arm64.swiftdoc</key>
@@ -124,7 +124,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			S2i7JHFfYFX5O2JB68pk23v31reoIbalJaOrnl3YxJA=
+			RdjJeaKRIde778eBcqLzwjUoerHjqkhr0JROY2eDz0k=
 			</data>
 		</dict>
 		<key>Modules/BlocksCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -145,7 +145,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			N1hooQiusnwZZczB2Z315RwPHbIZA67HQwSyTBryvig=
+			osc8Tynt2yNrDzNV2ZxWLk4mwMYjMDzUZLXqSKEtJkk=
 			</data>
 		</dict>
 		<key>Modules/BlocksCore.swiftmodule/x86_64.swiftdoc</key>
@@ -166,7 +166,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			N1hooQiusnwZZczB2Z315RwPHbIZA67HQwSyTBryvig=
+			osc8Tynt2yNrDzNV2ZxWLk4mwMYjMDzUZLXqSKEtJkk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
