@@ -15,8 +15,7 @@ Pod::Spec.new do |s|
   s.swift_version = '5.1'
   s.source = { :git => "https://github.com/elementspay/blocks-core-sdk-distribution.git", :tag => "#{s.version}" }
   s.frameworks = 'Foundation'
-  s.requires_arc = true
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', 'SWIFT_SUPPRESS_WARNINGS' => 'YES' }
-  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', 'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES' }
   s.vendored_frameworks = 'BlocksCore.xcframework'
 end
